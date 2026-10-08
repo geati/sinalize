@@ -1,0 +1,23 @@
+<article class="h-full bg-card border border-border rounded-2xl p-4 transition-shadow duration-300 hover:shadow-lg focus-within:ring-2 focus-within:ring-ring" role="article" aria-roledescription="card">
+  <a href="{% url 'catalog:sinal_list' termo.id_termo %}" class="flex h-full flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded" aria-label="Ver detalhes de {{ termo.nome_termo }}">
+    {% if termo.t_imagem %}
+      <img src="{{ termo.t_imagem.url }}" alt="{{ termo.nome_termo }}" width="320" height="160" class="w-full h-40 object-cover rounded-lg mb-3 aspect-[2/1]" loading="lazy" decoding="async">
+    {% endif %}
+
+    <header class="mb-2">
+      <h3 class="text-lg font-medium text-foreground">{{ termo.nome_termo }}</h3>
+      <div class="text-sm text-muted-foreground mt-1">{% if termo.autor %}Por {{ termo.autor.get_full_name }}{% endif %} {% if termo.created_at %} • {{ termo.created_at|date:"SHORT_DATE_FORMAT" }}{% endif %}</div>
+    </header>
+
+    <div class="text-sm text-muted-foreground mb-3">{% if termo.subcategoria %}{{ termo.subcategoria.nome_subcategoria }}{% elif termo.categoria %}{{ termo.categoria.nome_categoria }}{% endif %}</div>
+
+    {% if termo.descricao %}
+      <p class="text-sm text-muted-foreground mb-4 line-clamp-3">{{ termo.descricao }}</p>
+    {% endif %}
+
+    <div class="mt-auto flex items-center justify-between">
+      <span class="text-sm text-primary">Ver sinal</span>
+      <span class="text-sm text-muted-foreground">ID {{ termo.id_termo }}</span>
+    </div>
+  </a>
+</article>
